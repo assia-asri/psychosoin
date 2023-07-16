@@ -1,13 +1,18 @@
-//build node js and express server
+
+
+//import des modèles pour la base de donnée
+const db = require('./src/models');
+const userRouter = require("./src/routes/Users");
 const express = require("express");
+
+
+//build node js and express server
 const app = express();
 
 //permettre à express de récupérer les données postées dans le body
 app.use(express.json());
 
-//import des modèles pour la base de donnée
-const db = require('./src/models');
-
+app.use("/users", userRouter)
 
 //synchronisation de la base de données au démarrage du server
 db.sequelize.sync().then( () => {

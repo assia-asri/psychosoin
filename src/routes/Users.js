@@ -4,12 +4,14 @@ const {Users} = require("../models");
 
 //récupérer les données de la BDD
 router.get("/", async (req, res) => {
+    
     const listOfUsers = await Users.findAll();
     res.json(listOfUsers);
 });
 
 //insérer les données dans la BDD avec sequelize
-router.user("/", async (req, res) => {
+router.post("/", async (req, res) => {
+    //console.log('hello world');
     const user = req.body;
 
     // async et await permettent d'attendre le remplissage des données avant envoi
