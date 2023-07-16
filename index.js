@@ -6,12 +6,14 @@ const userRouter = require("./src/routes/Users");
 const programRouter = require("./src/routes/Programs");
 const trainingRouter = require("./src/routes/Trainings")
 const express = require("express");
+const cors = require("cors");
 
 //build node js and express server
 const app = express();
 
 //permettre à express de récupérer les données postées dans le body
 app.use(express.json());
+app.use(cors());
 
 app.use("/users", userRouter);
 app.use("/programs", programRouter);
