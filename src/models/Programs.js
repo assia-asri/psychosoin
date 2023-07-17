@@ -1,33 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
     const Programs = sequelize.define("Programs", {
-// dans sequelize les champs ID et createdAt et updatedAt sont générés automatiquement par défaut
-        
-        programName: {
+        // dans sequelize les champs ID et createdAt et updatedAt sont générés automatiquement par défaut
+        slug: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        programSlogan: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        programDescription: {
+        slogan: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        programPicture: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        programFreemium: {
-            type: DataTypes.BOOLEAN,
+        url: {
+            type: DataTypes.STRING,
             allowNull: false
         },
-        programprice: {
+        price: {
             type: DataTypes.FLOAT,
-            allowNull: false
-        },
-        programSlug: {
-            type: DataTypes.STRING,
             allowNull: false
         }
     })
