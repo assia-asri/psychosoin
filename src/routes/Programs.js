@@ -9,6 +9,18 @@ router.get("/", async (req, res) => {
     res.json(listOfPrograms);
 });
 
+//récuperer les données de un seul programme par id
+router.get("/:id", async (req, res) => {
+    const programId = req.params.id
+
+    const program = await Programs.findOne({
+        where: {
+            id: programId
+        }
+    });
+    res.json(program);
+})
+
 //insérer les données dans la BDD avec sequelize
 router.post("/", async (req, res) => {
 
