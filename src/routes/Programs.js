@@ -27,14 +27,41 @@ router.delete("/:id", async (req, res) => {
 
     // methode destroy de sequelize prend en parametre where,
     // pour determiner l'id du programme a supprimer
-    await Programs.destroy({ 
-        where: 
-            { 
-                id: programId 
-            } 
-        });
+    await Programs.destroy({
+        where:
+        {
+            id: programId
+        }
+    });
 
     res.send(programId);
+})
+
+//utilisation de la methode put de HTTP avec path param et body
+router.put("/:id", async (req, res) => {
+    const program = req.body;
+    const programId = req.params.id;
+
+    // methode destroy de sequelize prend en parametre where,
+    // pour determiner l'id du programme a supprimer
+    await Programs.update(
+        {
+            slug: program.slug,
+            name: program.name,
+            slogan: program.slogan,
+            description: program.description,
+            url: program.url,
+            price: program.price,
+        },
+        {
+            where: {
+                id: programId
+            }
+        }
+    );
+
+    //renvoi du nouveau programme modifié
+    res.send(program);
 })
 
 module.exports = router;
