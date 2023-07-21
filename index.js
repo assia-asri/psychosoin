@@ -4,6 +4,7 @@
 const db = require('./src/models');
 const userRouter = require("./src/routes/Users");
 const programRouter = require("./src/routes/Programs");
+const AuthRouter = require("./src/routes/Auth");
 const express = require("express");
 const cors = require("cors");
 
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use("/users", userRouter);
 app.use("/programs", programRouter);
+app.use("/auth", AuthRouter)
 
 //synchronisation de la base de données au démarrage du server
 db.sequelize.sync().then( () => {
