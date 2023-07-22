@@ -43,9 +43,10 @@ router.post("/login", async (req, res) => {
     // httpOly permet d'empecher l'accès au cookie a partir le code front
     res.cookie('token', token, {
         httpOnly: true,
+        expires: new Date(Date.now() + (1000 * 60 * 60))
     });
 
-    res.status(200).json({});
+    res.status(200).json({role: user.role});
 });
 
 //récuperer les données pour créer un nouveau user

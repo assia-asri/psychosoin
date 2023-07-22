@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { Programs } = require("../models");
+const { isAuth, isAdmin } = require('../middlewares/auth');
 
 //récupérer les données de la BDD
-router.get("/", async (req, res) => {
+router.get("/", isAuth, async (req, res) => {
 
     const listOfPrograms = await Programs.findAll();
     res.json(listOfPrograms);
 });
 
 //récuperer les données de un seul programme par id
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAuth, async (req, res) => {
     const programId = req.params.id
 
     const program = await Programs.findOne({
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res) => {
 })
 
 //insérer les données dans la BDD avec sequelize
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
 
     const program = req.body;
 
@@ -34,7 +35,7 @@ router.post("/", async (req, res) => {
 //supprimer les données de la BDD avec
 //on utilisera la methode DELETE
 //:id est un parametre (path param) qui va contenir l'id du programme
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
     const programId = req.params.id
 
     // methode destroy de sequelize prend en parametre where,
@@ -50,7 +51,7 @@ router.delete("/:id", async (req, res) => {
 })
 
 //utilisation de la methode put de HTTP avec path param et body
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
     const program = req.body;
     const programId = req.params.id;
 
